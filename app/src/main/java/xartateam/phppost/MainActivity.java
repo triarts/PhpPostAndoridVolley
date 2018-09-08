@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
         // url dari server
         String requestUrl = "http://192.168.0.3/phppost/receiver_data.php";
+
+        // untuk tentukan mw post apa put
         StringRequest stringRequest = new StringRequest(Request.Method.POST, requestUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                // print error
                 error.printStackTrace(); //log the error resulting from the request for diagnosis/debugging
 
             }
@@ -45,14 +48,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> postMap = new HashMap<>();
-                // Set up nama variable post dan variable yang akan dikirim datanya ke server
+                // Set up nama variable post dan setup value yang akan dikirim datanya ke server
                 postMap.put("data_iot", data_iot_str);
-//            postMap.put("param2", value2);
+                //            postMap.put("param2", value2);
                 //..... Add as many key value pairs in the map as necessary for your request
                 return postMap;
             }
         };
 
+        // panggil fungsinya
         Volley.newRequestQueue(MainActivity.this).add(stringRequest);
 
     }
